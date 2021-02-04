@@ -16,7 +16,7 @@ target("dosemu-freedos")
         os.cp("$(projectdir)/src/bat/insfdusr.bat", path.join(commandsdir, "bat"))
         os.mkdir(dosrcddir)
         os.cp("$(projectdir)/src/bat/dosrc.d/bin2path.bat", dosrcddir)
-        os.cp("$(projectdir)/src/bat/dosrc.d/sugfdusr.bat", dosrcddir)
+        os.cp("$(projectdir)/src/bat/dosrc.d/1sugfdus.bat", dosrcddir)
     end)
     on_uninstall(function (target)
         local installdir = target:installdir()
@@ -33,7 +33,7 @@ target("dosemu-freedos")
         os.rm(path.join(bindir, "dosemu-installfreedos"))
         os.rm(path.join(sharedir, "dosemu/commands/bat/insfdusr.bat"))
         os.rm(path.join(sharedir, "dosemu/commands/dosemu/dosrc.d/bin2path.bat"))
-        os.rm(path.join(sharedir, "dosemu/commands/dosemu/dosrc.d/sugfdusr.bat"))
+        os.rm(path.join(sharedir, "dosemu/commands/dosemu/dosrc.d/1sugfdus.bat"))
         if os.emptydir(libexecdir) then os.rmdir(libexecdir) end
         if os.emptydir(libexecparentdir) then os.rmdir(libexecparentdir) end
         if os.emptydir(dosrcddir) then os.rmdir(dosrcddir) end
