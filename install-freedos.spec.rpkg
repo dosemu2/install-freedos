@@ -1,0 +1,40 @@
+#
+# spec file for package install-freedos
+#
+
+Name: {{{ git_dir_name }}}
+Version: {{{ git_dir_version }}}
+Release: 1%{?dist}
+Summary: freedos installer
+
+Group: System/Emulator
+
+License: GPL-3.0+
+URL: http://www.github.com/dosemu2/install-freedos
+VCS: {{{ git_dir_vcs }}}
+Source: {{{ git_dir_archive }}}
+
+Requires: python3
+
+%define debug_package %{nil}
+
+%description
+freedos installer for dosemu2.
+
+%prep
+{{{ git_dir_setup_macro }}}
+
+%build
+
+%check
+
+%install
+make DESTDIR=%{buildroot} prefix=%{_prefix} install
+
+%files
+%defattr(-,root,root)
+%{_datadir}/dosemu/commands/*
+%{_libexecdir}/dosemu/*
+
+%changelog
+{{{ git_dir_changelog }}}
