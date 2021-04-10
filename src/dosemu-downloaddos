@@ -96,7 +96,7 @@ def download_FREEDOS_FULL_ARCHIVES(freedos_url, destination):
     for filename in FREEDOS_ARCHIVES_KERNEL_COMMAND:
         download_file(freedos_url + '/repos/base/' + filename + '.zip', destination)
     print('Downloading extra FreeDOS userspace tools')
-    for filename in FREEDOS_ARCHIVES:
+    for filename in FREEDOS_USERSPACE_TOOLS:
         try:
             download_file(freedos_url + '/repos/base/' + filename + '.zip', destination)
         except urllib.error.HTTPError:
