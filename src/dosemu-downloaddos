@@ -19,7 +19,7 @@ FREEDOS_BASE_URL = FREEDOS_DEFAULT_MIRROR + '/distributions'
 FREEDOS11_URL = FREEDOS_BASE_URL + '/1.1'
 FREEDOS12_URL = FREEDOS_BASE_URL + '/1.2'
 FREEDOS_USERSPACE_TOOLS = [ 'assign', 'attrib', 'choice', 'comp', 'debug', 'display', 'edit', 'edlin', 'fc',
-                    'find', 'format', 'help', 'label', 'mem', 'mode', 'nansi', 'share', 'sort', 'swsubst', 'tree']
+                    'find', 'format', 'help', 'htmlhelp', 'label', 'mem', 'mode', 'nansi', 'share', 'sort', 'swsubst', 'tree']
 FREEDOS_ARCHIVES_KERNEL_COMMAND = [ 'kernel', 'command' ]
 FREEDOS_ARCHIVES_EXTRA = ['defrag', 'deltree', 'diskcomp', 'diskcopy', 'exe2bin', 'more', 'move', 'replace',
                      'share', 'shsucdx', 'xcopy']
