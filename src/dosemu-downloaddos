@@ -78,12 +78,18 @@ def download_file(source, destination_directory):
 
 def download_pkg_info(freedos_url, packages, destination):
     for filename in packages:
-        download_file(freedos_url + '/repos/pkg-info/' + filename + '.txt', destination)
+        try:
+            download_file(freedos_url + '/repos/pkg-info/' + filename + '.txt', destination)
+        except urllib.error.HTTPError:
+            print('WARNING: The chosen version of FreeDOS does not contain ' + filename + '!')
 
 def download_FREEDOS_USERSPACE_ARCHIVES(freedos_url, destination):
     print('Downloading FreeDOS userspace tools...')
     for filename in FREEDOS_USERSPACE_TOOLS:
-        download_file(freedos_url + '/repos/base/' + filename + '.zip', destination)
+        try:
+            download_file(freedos_url + '/repos/base/' + filename + '.zip', destination)
+        except urllib.error.HTTPError:
+            print('WARNING: The chosen version of FreeDOS does not contain ' + filename + '!')
 
 def download_FREEDOS_FULL_ARCHIVES(freedos_url, destination):
     print('Downloading FreeDOS kernel and FreeCOM...')
@@ -91,7 +97,10 @@ def download_FREEDOS_FULL_ARCHIVES(freedos_url, destination):
         download_file(freedos_url + '/repos/base/' + filename + '.zip', destination)
     print('Downloading extra FreeDOS userspace tools')
     for filename in FREEDOS_ARCHIVES:
-        download_file(freedos_url + '/repos/base/' + filename + '.zip', destination)
+        try:
+            download_file(freedos_url + '/repos/base/' + filename + '.zip', destination)
+        except urllib.error.HTTPError:
+            print('WARNING: The chosen version of FreeDOS does not contain ' + filename + '!')
     for filename in FREEDOS_UNIXLIKE_ARCHIVES:
         try:
             download_file(freedos_url + '/repos/unixlike/' + filename + '.zip', destination)
