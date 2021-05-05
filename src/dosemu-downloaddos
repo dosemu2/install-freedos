@@ -19,15 +19,14 @@ FREEDOS_BASE_URL = FREEDOS_DEFAULT_MIRROR + '/distributions'
 FREEDOS11_URL = FREEDOS_BASE_URL + '/1.1'
 FREEDOS12_URL = FREEDOS_BASE_URL + '/1.2'
 FREEDOS_USERSPACE_TOOLS = [ 'assign', 'attrib', 'choice', 'comp', 'debug', 'display', 'edit', 'edlin', 'fc',
-                    'find', 'format', 'help', 'htmlhelp', 'label', 'mem', 'mode', 'nansi', 'share', 'sort', 'swsubst', 'tree']
+                    'find', 'format', 'htmlhelp', 'label', 'mem', 'mode', 'nansi', 'share', 'sort', 'swsubst', 'tree']
 FREEDOS_ARCHIVES_KERNEL_COMMAND = [ 'kernel', 'command' ]
 FREEDOS_ARCHIVES_EXTRA = ['defrag', 'deltree', 'diskcomp', 'diskcopy', 'exe2bin', 'more', 'move', 'replace',
                      'share', 'shsucdx', 'xcopy']
 FREEDOS_UNIXLIKE_ARCHIVES = ['touch']
 FREEDOS_UTIL_ARCHIVES = ['wcd']
-
-BWBASIC_URL = FREEDOS_DEFAULT_MIRROR + '/devel/basic/bwbasic/bwb220ax.zip'
-LIB_URL     = FREEDOS_DEFAULT_MIRROR + '/devel/tools/lib-sk32.zip'
+FREEDOS_NET_ARCHIVES = ['curl', 'gopherus', 'links', 'ping']
+FREEDOS_DEVEL_ARCHIVES = ['bwbasic']
 
 TMP_DIR = os.path.join('/tmp', os.path.basename(sys.argv[0]) + '-' + os.environ['USER'] + '-' + str(os.getpid()))
 
@@ -90,20 +89,9 @@ def download_FREEDOS_USERSPACE_ARCHIVES(freedos_url, destination):
             download_file(freedos_url + '/repos/base/' + filename + '.zip', destination)
         except urllib.error.HTTPError:
             print('WARNING: The chosen version of FreeDOS does not contain ' + filename + '!')
-
-def download_FREEDOS_FULL_ARCHIVES(freedos_url, destination):
-    print('Downloading FreeDOS kernel and FreeCOM...')
-    for filename in FREEDOS_ARCHIVES_KERNEL_COMMAND:
-        download_file(freedos_url + '/repos/base/' + filename + '.zip', destination)
-    print('Downloading extra FreeDOS userspace tools')
-    for filename in FREEDOS_USERSPACE_TOOLS:
-        try:
-            download_file(freedos_url + '/repos/base/' + filename + '.zip', destination)
-        except urllib.error.HTTPError:
-            print('WARNING: The chosen version of FreeDOS does not contain ' + filename + '!')
     for filename in FREEDOS_UNIXLIKE_ARCHIVES:
         try:
-            download_file(freedos_url + '/repos/unixlike/' + filename + '.zip', destination)
+            download_file(freedos_url + '/repos/unix/' + filename + '.zip', destination)
         except urllib.error.HTTPError:
             # utilities that are now in 'unixline' were previously in 'util'
             FREEDOS_UTIL_ARCHIVES.append(filename)
@@ -112,9 +100,23 @@ def download_FREEDOS_FULL_ARCHIVES(freedos_url, destination):
             download_file(freedos_url + '/repos/util/' + filename + '.zip', destination)
         except urllib.error.HTTPError:
             print('WARNING: The chosen version of FreeDOS does not contain ' + filename + '!')
+    for filename in FREEDOS_NET_ARCHIVES:
+        try:
+            download_file(freedos_url + '/repos/net/' + filename + '.zip', destination)
+        except urllib.error.HTTPError:
+            print('WARNING: The chosen version of FreeDOS does not contain ' + filename + '!')
+    for filename in FREEDOS_DEVEL_ARCHIVES:
+        try:
+            download_file(freedos_url + '/repos/devel/' + filename + '.zip', destination)
+        except urllib.error.HTTPError:
+            print('WARNING: The chosen version of FreeDOS does not contain ' + filename + '!')
 
-    download_file(BWBASIC_URL, destination)
-    download_file(LIB_URL,     destination)
+def download_FREEDOS_FULL_ARCHIVES(freedos_url, destination):
+    print('Downloading FreeDOS kernel and FreeCOM...')
+    for filename in FREEDOS_ARCHIVES_KERNEL_COMMAND:
+        download_file(freedos_url + '/repos/base/' + filename + '.zip', destination)
+    print('Downloading extra FreeDOS userspace tools')
+    download_FREEDOS_USERSPACE_ARCHIVES(freedos_url, destination)
 
     print('Downloading done')
 
@@ -192,7 +194,7 @@ def download_dos(dos_flavour, destination):
     os.makedirs(destination, exist_ok=True)
 
     if dos_flavour == 'freedos12':
-        download_pkg_info(FREEDOS12_URL, FREEDOS_ARCHIVES_KERNEL_COMMAND + FREEDOS_UNIXLIKE_ARCHIVES + FREEDOS_UTIL_ARCHIVES, destination)
+        download_pkg_info(FREEDOS12_URL, FREEDOS_ARCHIVES_KERNEL_COMMAND + FREEDOS_UNIXLIKE_ARCHIVES + FREEDOS_UTIL_ARCHIVES + FREEDOS_NET_ARCHIVES, destination)
         download_FREEDOS_FULL_ARCHIVES(FREEDOS12_URL, destination)
     if dos_flavour in ['freedos12userspace', 'freedos12', 'freedosuserspace']:
         download_pkg_info(FREEDOS12_URL, FREEDOS_USERSPACE_TOOLS, destination)

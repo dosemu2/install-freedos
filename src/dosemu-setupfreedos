@@ -11,7 +11,8 @@ import zlib
 from pathlib import Path
 
 USERSPACE_TOOLS = [ 'assign', 'attrib', 'choice', 'comp', 'debug', 'display', 'edit', 'edlin', 'fc',
-                    'find', 'format', 'help', 'htmlhelp', 'label', 'mem', 'mode', 'nansi', 'share', 'sort', 'swsubst', 'tree']
+                    'find', 'format', 'htmlhelp', 'label', 'mem', 'mode', 'nansi', 'share', 'sort',
+                    'swsubst', 'tree', 'curl', 'gopherus', 'links', 'ping']
 
 def extract_zipfile_entry(archive, zipinfo, output_filename):
     if Path(output_filename).exists():
