@@ -5,8 +5,8 @@
 Name: {{{ git_dir_name }}}
 Version: {{{ git_dir_version }}}
 Release: 1%{?dist}
-Summary: freedos installer
-
+Summary: FreeDOS installer
+BuildArch: noarch
 Group: System/Emulator
 
 License: GPL-3.0+
