@@ -33,8 +33,8 @@ make DESTDIR=%{buildroot} prefix=%{_prefix} install
 
 %files
 %defattr(-,root,root)
-%{_datadir}/dosemu2-extras/bat/*
-%{_libexecdir}/dosemu/*
+%{_datadir}/dosemu2-extras
+%{_libexecdir}/dosemu
 
 %changelog
 {{{ git_dir_changelog }}}
