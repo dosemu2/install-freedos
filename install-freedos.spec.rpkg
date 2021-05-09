@@ -12,7 +12,7 @@ Group: System/Emulator
 License: GPL-3.0+
 URL: http://www.github.com/dosemu2/install-freedos
 VCS: {{{ git_dir_vcs }}}
-Source: {{{ git_dir_archive }}}
+Source0: {{{ git_dir_archive }}}
 
 Requires: python3
 
