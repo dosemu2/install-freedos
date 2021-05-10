@@ -1,7 +1,7 @@
 prefix ?= /usr/local
 
 sysdir = $(prefix)/share/dosemu2-extras
-libexecdir = $(prefix)/libexec
+libexecdir ?= $(prefix)/libexec
 
 all:
 

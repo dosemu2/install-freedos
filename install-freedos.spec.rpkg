@@ -29,7 +29,7 @@ freedos installer for dosemu2.
 %check
 
 %install
-make DESTDIR=%{buildroot} prefix=%{_prefix} install
+make DESTDIR=%{buildroot} prefix=%{_prefix} libexecdir=%{_libexecdir} install
 
 %files
 %defattr(-,root,root)
