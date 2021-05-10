@@ -14,6 +14,7 @@ URL: http://www.github.com/dosemu2/install-freedos
 VCS: {{{ git_dir_vcs }}}
 Source0: {{{ git_dir_archive }}}
 
+BuildRequires: make
 Requires: python3
 
 %define debug_package %{nil}
