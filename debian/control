@@ -10,7 +10,7 @@ Homepage: https://github.com/dosemu2/install-freedos
 
 Package: install-freedos
 Architecture: all
-Depends: python3
+Depends: python3, python3-tqdm
 Description: freedos installer scripts
  A set of scripts to install freedos.
  Also provides a set of bat files for dosemu2 integration.
