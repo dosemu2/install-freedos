@@ -135,39 +135,11 @@ def assert_sha256sum(file, sha256sum):
         print('Please remove the file and rerun the script.')
         sys.exit(1)
 
-def process_disk_image_archive(archive, destination):
-    image_archive = zipfile.ZipFile(archive)
-    image_filename = image_archive.namelist()[0]
-    image_archive.extractall(TMP_DIR)
-    image_path = os.path.join(TMP_DIR, image_filename)
-    subprocess.run(['mcopy', '-sn', '-i', image_path, '::*', destination], env={"PATH": os.environ['PATH'], "MTOOLS_LOWER_CASE": '1'})
-
 def download_files(imgurls, destination):
     destination_files = []
     for imgurl in imgurls:
         destination_files.append(download_file(imgurl, destination))
     return destination_files
-
-def download_and_process(imgurls, destination, sha256sums = []):
-    os.mkdir(TMP_DIR)
-    destination_files = download_files(imgurls, TMP_DIR)
-    for i, imgurl in enumerate(imgurls):
-        if len(sha256sums) > 0:
-            assert_sha256sum(destination_files[i], sha256sums[i])
-    for destination_file in destination_files:
-        if re.search(r'.zip$', destination_file) != None and len(zipfile.ZipFile(destination_file).namelist()) == 1:
-            process_disk_image_archive(destination_file, destination)
-        else:
-            shutil.move(destination_file, destination)
-    shutil.rmtree(TMP_DIR)
-
-def verify_tool(executable, package):
-    if subprocess.getstatusoutput(['which', executable]) == 0:
-        print('Please install ' + package + ' and make sure that ' + executable + ' is on your PATH.')
-        sys.exit(1)
-
-def verify_system():
-    verify_tool('mcopy', 'mtools')
 
 def verify_noexistinginstall(destination):
     if os.listdir(destination) != []:
@@ -206,8 +178,6 @@ def download_dos(dos_flavour, destination):
         download_FREEDOS_USERSPACE_ARCHIVES(FREEDOS11_URL, destination)
         return
 
-verify_system()
-
 parser = argparse.ArgumentParser(description="""Script to download either FreeDOS or a set of disk images.
 Multiple versions of FreeDOS are preconfigured.
 When a custom URL to a disk image is provided, based on known filename patterns, all related images are downloaded and extracted.
@@ -215,7 +185,6 @@ Either a name should contain \"Disk ? of x\" or \"diskx\" where 1 is the first d
 The destination directory will contain all files from all disk images.""")
 parser.add_argument("-l", "--list", help="List available DOS variants", action="store_true")
 parser.add_argument("-o", "--os", help="Download the specified DOS", type=str)
-parser.add_argument("-c", "--custom",    help="Download specified disk/file set, requires a destination directory", type=str)
 parser.add_argument("-d", "--destination", help="Specify/override the destination directory", type=str)
 parser.add_argument("-s", "--sha256sum", help="Specify one or more sha256sum(s)", nargs='+', type=str)
 
@@ -234,16 +203,3 @@ if args.os:
     else:
         destination = os.path.join(os.environ['HOME'], '.cache', 'dosemu', args.os.replace('userspace', ''))
     download_dos(dos_to_download, destination)
-
-if args.custom and args.destination:
-    url = args.custom
-    destination = args.destination
-    os.makedirs(destination, exist_ok=True)
-    if not os.listdir(destination):
-        download_and_process(derive_url_list(url), destination, args.sha256sum if args.sha256sum else [])
-    else:
-        if args.sha256sum and not list(Path(destination).glob('*.sys')):
-            for i, file in enumerate(Path(destination).iterdir()):
-                assert_sha256sum(file, args.sha256sum[i])
-        else:
-            print('Continuing with existing file set in: ' + destination)
