@@ -11,7 +11,6 @@ install:
 	install -m 0755 -D src/dosemu-* -t $(DESTDIR)$(libexecdir)/dosemu
 
 rpm: fdpp.spec.rpkg
-	git clean -fd
 	rpkg local
 
 deb:
