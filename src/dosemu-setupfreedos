@@ -102,7 +102,8 @@ parser.add_argument("-v", "--variant", type=str, choices=['full', 'userspace'], 
 args = parser.parse_args()
 
 # system installation
-cmddir = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'share', 'dosemu', 'commands', 'c')
+info = subprocess.run(['dosemu', '-info'], stdout=subprocess.PIPE).stdout.decode(sys.stdout.encoding).splitlines()[0]
+cmddir = os.path.join(info[info.find(': ') + 2:], 'share', 'dosemu', 'commands', 'c')
 if not Path(cmddir, 'fdconfig.sys').is_file():
     # running from within source tree
     cmddir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'c')
