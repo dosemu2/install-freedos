@@ -35,6 +35,8 @@ def extract_zipfile_entry(archive, zipinfo, output_filename):
 def extract_freedos_archives(source, drive_root, variant):
     for filename in Path(source).glob('*.zip'):
         if variant == 'userspace':
+            if str(filename).endswith('freecom.zip'):
+                continue
             if str(filename).endswith('command.zip'):
                 continue
             if str(filename).endswith('kernel.zip'):
