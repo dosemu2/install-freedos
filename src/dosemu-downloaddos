@@ -20,7 +20,7 @@ FREEDOS11_URL = FREEDOS_BASE_URL + '/1.1'
 FREEDOS12_URL = FREEDOS_BASE_URL + '/1.2'
 FREEDOS_USERSPACE_TOOLS = [ 'assign', 'attrib', 'choice', 'comp', 'debug', 'display', 'edit', 'edlin', 'fc',
                     'find', 'format', 'htmlhelp', 'label', 'mem', 'mode', 'nansi', 'share', 'sort', 'swsubst', 'tree']
-FREEDOS_ARCHIVES_KERNEL_COMMAND = [ 'kernel', 'command' ]
+FREEDOS_ARCHIVES_KERNEL_COMMAND = [ 'kernel', 'command', 'freecom' ]
 FREEDOS_ARCHIVES_EXTRA = ['defrag', 'deltree', 'diskcomp', 'diskcopy', 'exe2bin', 'more', 'move', 'replace',
                      'share', 'shsucdx', 'xcopy']
 FREEDOS_UNIXLIKE_ARCHIVES = ['touch']
@@ -114,7 +114,10 @@ def download_FREEDOS_USERSPACE_ARCHIVES(freedos_url, destination):
 def download_FREEDOS_FULL_ARCHIVES(freedos_url, destination):
     print('Downloading FreeDOS kernel and FreeCOM...')
     for filename in FREEDOS_ARCHIVES_KERNEL_COMMAND:
-        download_file(freedos_url + '/repos/base/' + filename + '.zip', destination)
+        try:
+            download_file(freedos_url + '/repos/base/' + filename + '.zip', destination)
+        except urllib.error.HTTPError:
+            print('WARNING: The chosen version of FreeDOS does not contain ' + filename + '!')
     print('Downloading extra FreeDOS userspace tools')
     download_FREEDOS_USERSPACE_ARCHIVES(freedos_url, destination)
 
