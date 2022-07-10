@@ -111,7 +111,7 @@ if not Path(cmddir, 'fdconfig.sys').is_file():
     cmddir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'c')
 
 if not args.source:
-    shortname = 'freedos12'
+    shortname = 'freedos13'
     source = os.path.join(os.environ['HOME'], '.cache', 'dosemu', shortname)
 else:
     if os.sep in args.source:

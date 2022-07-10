@@ -15,9 +15,10 @@ from tqdm import tqdm
 
 FREEDOS_DEFAULT_MIRROR = 'https://www.ibiblio.org/pub/micro/pc-stuff/freedos/files'
 
-FREEDOS_BASE_URL = FREEDOS_DEFAULT_MIRROR + '/distributions'
+FREEDOS_BASE_URL = FREEDOS_DEFAULT_MIRROR + '/repositories'
 FREEDOS11_URL = FREEDOS_BASE_URL + '/1.1'
 FREEDOS12_URL = FREEDOS_BASE_URL + '/1.2'
+FREEDOS13_URL = FREEDOS_BASE_URL + '/1.3'
 FREEDOS_USERSPACE_TOOLS = [ 'assign', 'attrib', 'choice', 'comp', 'debug', 'display', 'edit', 'edlin', 'fc',
                     'find', 'format', 'htmlhelp', 'label', 'mem', 'mode', 'nansi', 'share', 'sort', 'swsubst', 'tree']
 FREEDOS_ARCHIVES_KERNEL_COMMAND = [ 'kernel', 'command', 'freecom' ]
@@ -78,7 +79,7 @@ def download_file(source, destination_directory):
 def download_pkg_info(freedos_url, packages, destination):
     for filename in packages:
         try:
-            download_file(freedos_url + '/repos/pkg-info/' + filename + '.txt', destination)
+            download_file(freedos_url + '/pkg-info/' + filename + '.txt', destination)
         except urllib.error.HTTPError:
             print('WARNING: The chosen version of FreeDOS does not contain ' + filename + '!')
 
@@ -86,28 +87,28 @@ def download_FREEDOS_USERSPACE_ARCHIVES(freedos_url, destination):
     print('Downloading FreeDOS userspace tools...')
     for filename in FREEDOS_USERSPACE_TOOLS:
         try:
-            download_file(freedos_url + '/repos/base/' + filename + '.zip', destination)
+            download_file(freedos_url + '/base/' + filename + '.zip', destination)
         except urllib.error.HTTPError:
             print('WARNING: The chosen version of FreeDOS does not contain ' + filename + '!')
     for filename in FREEDOS_UNIXLIKE_ARCHIVES:
         try:
-            download_file(freedos_url + '/repos/unix/' + filename + '.zip', destination)
+            download_file(freedos_url + '/unix/' + filename + '.zip', destination)
         except urllib.error.HTTPError:
             # utilities that are now in 'unixline' were previously in 'util'
             FREEDOS_UTIL_ARCHIVES.append(filename)
     for filename in FREEDOS_UTIL_ARCHIVES:
         try:
-            download_file(freedos_url + '/repos/util/' + filename + '.zip', destination)
+            download_file(freedos_url + '/util/' + filename + '.zip', destination)
         except urllib.error.HTTPError:
             print('WARNING: The chosen version of FreeDOS does not contain ' + filename + '!')
     for filename in FREEDOS_NET_ARCHIVES:
         try:
-            download_file(freedos_url + '/repos/net/' + filename + '.zip', destination)
+            download_file(freedos_url + '/net/' + filename + '.zip', destination)
         except urllib.error.HTTPError:
             print('WARNING: The chosen version of FreeDOS does not contain ' + filename + '!')
     for filename in FREEDOS_DEVEL_ARCHIVES:
         try:
-            download_file(freedos_url + '/repos/devel/' + filename + '.zip', destination)
+            download_file(freedos_url + '/devel/' + filename + '.zip', destination)
         except urllib.error.HTTPError:
             print('WARNING: The chosen version of FreeDOS does not contain ' + filename + '!')
 
@@ -115,7 +116,7 @@ def download_FREEDOS_FULL_ARCHIVES(freedos_url, destination):
     print('Downloading FreeDOS kernel and FreeCOM...')
     for filename in FREEDOS_ARCHIVES_KERNEL_COMMAND:
         try:
-            download_file(freedos_url + '/repos/base/' + filename + '.zip', destination)
+            download_file(freedos_url + '/base/' + filename + '.zip', destination)
         except urllib.error.HTTPError:
             print('WARNING: The chosen version of FreeDOS does not contain ' + filename + '!')
     print('Downloading extra FreeDOS userspace tools')
@@ -168,12 +169,17 @@ def derive_url_list(imgurl):
 def download_dos(dos_flavour, destination):
     os.makedirs(destination, exist_ok=True)
 
-    if dos_flavour == 'freedos12':
-        download_pkg_info(FREEDOS12_URL, FREEDOS_ARCHIVES_KERNEL_COMMAND + FREEDOS_UNIXLIKE_ARCHIVES + FREEDOS_UTIL_ARCHIVES + FREEDOS_NET_ARCHIVES, destination)
-        download_FREEDOS_FULL_ARCHIVES(FREEDOS12_URL, destination)
-    if dos_flavour in ['freedos12userspace', 'freedos12', 'freedosuserspace']:
-        download_pkg_info(FREEDOS12_URL, FREEDOS_USERSPACE_TOOLS, destination)
-        download_FREEDOS_USERSPACE_ARCHIVES(FREEDOS12_URL, destination)
+    if dos_flavour in ['freedos13userspace', 'freedos13', 'freedosuserspace']:
+        freedos_url = FREEDOS13_URL
+    if dos_flavour in ['freedos12userspace', 'freedos12']:
+        freedos_url = FREEDOS12_URL
+
+    if dos_flavour in ['freedos12', 'freedos13']:
+        download_pkg_info(freedos_url, FREEDOS_ARCHIVES_KERNEL_COMMAND + FREEDOS_UNIXLIKE_ARCHIVES + FREEDOS_UTIL_ARCHIVES + FREEDOS_NET_ARCHIVES, destination)
+        download_FREEDOS_FULL_ARCHIVES(freedos_url, destination)
+    if dos_flavour in ['freedos13userspace', 'freedos13', 'freedos12userspace', 'freedos12', 'freedosuserspace']:
+        download_pkg_info(freedos_url, FREEDOS_USERSPACE_TOOLS, destination)
+        download_FREEDOS_USERSPACE_ARCHIVES(freedos_url, destination)
         return
     if dos_flavour == 'freedos11':
         download_FREEDOS_FULL_ARCHIVES(FREEDOS11_URL, destination)
@@ -193,6 +199,8 @@ parser.add_argument("-s", "--sha256sum", help="Specify one or more sha256sum(s)"
 
 args = parser.parse_args()
 if args.list:
+    print('freedos13 FreeDOS 1.3 (2022)')
+    print('freedos13userspace FreeDOS 1.3 userspace (2022)')
     print('freedos12 FreeDOS 1.2 (2016)')
     print('freedos12userspace FreeDOS 1.2 userspace (2016)')
     print('freedos11 FreeDOS 1.1 (2011)')
