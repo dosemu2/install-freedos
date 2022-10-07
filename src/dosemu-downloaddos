@@ -27,6 +27,7 @@ FREEDOS_ARCHIVES_EXTRA = ['defrag', 'deltree', 'diskcomp', 'diskcopy', 'exe2bin'
 FREEDOS_UNIXLIKE_ARCHIVES = ['touch']
 FREEDOS_UTIL_ARCHIVES = ['wcd']
 FREEDOS_NET_ARCHIVES = ['curl', 'gopherus', 'links', 'ping']
+FREEDOS_SOUND_ARCHIVES = ['dosmid', 'adplay', 'opencp']
 FREEDOS_DEVEL_ARCHIVES = ['bwbasic']
 
 TMP_DIR = os.path.join('/tmp', os.path.basename(sys.argv[0]) + '-' + os.environ['USER'] + '-' + str(os.getpid()))
@@ -104,6 +105,11 @@ def download_FREEDOS_USERSPACE_ARCHIVES(freedos_url, destination):
     for filename in FREEDOS_NET_ARCHIVES:
         try:
             download_file(freedos_url + '/net/' + filename + '.zip', destination)
+        except urllib.error.HTTPError:
+            print('WARNING: The chosen version of FreeDOS does not contain ' + filename + '!')
+    for filename in FREEDOS_SOUND_ARCHIVES:
+        try:
+            download_file(freedos_url + '/sound/' + filename + '.zip', destination)
         except urllib.error.HTTPError:
             print('WARNING: The chosen version of FreeDOS does not contain ' + filename + '!')
     for filename in FREEDOS_DEVEL_ARCHIVES:
