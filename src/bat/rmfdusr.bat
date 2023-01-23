@@ -6,3 +6,4 @@ deltree /y c:\help
 deltree /y c:\links
 deltree /y c:\net
 deltree /y c:\nls
+deltree /y c:\sound
