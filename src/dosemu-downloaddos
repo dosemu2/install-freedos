@@ -19,6 +19,7 @@ FREEDOS_BASE_URL = FREEDOS_DEFAULT_MIRROR + '/repositories'
 FREEDOS11_URL = FREEDOS_BASE_URL + '/1.1'
 FREEDOS12_URL = FREEDOS_BASE_URL + '/1.2'
 FREEDOS13_URL = FREEDOS_BASE_URL + '/1.3'
+FREEDOS_APPS = [ 'dn2' ]
 FREEDOS_USERSPACE_TOOLS = [ 'assign', 'attrib', 'choice', 'comp', 'debug', 'display', 'edit', 'edlin', 'fc',
                     'find', 'format', 'htmlhelp', 'label', 'mem', 'mode', 'nansi', 'share', 'sort', 'swsubst', 'tree']
 FREEDOS_ARCHIVES_KERNEL_COMMAND = [ 'kernel', 'command', 'freecom' ]
@@ -26,7 +27,7 @@ FREEDOS_ARCHIVES_EXTRA = ['defrag', 'deltree', 'diskcomp', 'diskcopy', 'exe2bin'
                      'share', 'shsucdx', 'xcopy']
 FREEDOS_UNIXLIKE_ARCHIVES = ['touch']
 FREEDOS_UTIL_ARCHIVES = ['wcd']
-FREEDOS_NET_ARCHIVES = ['curl', 'gopherus', 'links', 'ping']
+FREEDOS_NET_ARCHIVES = ['curl', 'gopherus', 'links', 'ping', 'terminal']
 FREEDOS_SOUND_ARCHIVES = ['dosmid', 'adplay', 'opencp']
 FREEDOS_DEVEL_ARCHIVES = ['bwbasic']
 
@@ -84,6 +85,11 @@ def download_pkg_info(freedos_url, packages, destination):
 
 def download_FREEDOS_USERSPACE_ARCHIVES(freedos_url, destination):
     print('Downloading FreeDOS userspace tools...')
+    for filename in FREEDOS_APPS:
+        try:
+            download_file(freedos_url + '/apps/' + filename + '.zip', destination)
+        except urllib.error.HTTPError:
+            print('WARNING: The chosen version of FreeDOS does not contain ' + filename + '!')
     for filename in FREEDOS_USERSPACE_TOOLS:
         try:
             download_file(freedos_url + '/base/' + filename + '.zip', destination)

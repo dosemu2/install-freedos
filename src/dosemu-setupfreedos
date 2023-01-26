@@ -13,7 +13,7 @@ from pathlib import Path
 USERSPACE_TOOLS = [ 'assign', 'attrib', 'choice', 'comp', 'debug', 'display', 'edit', 'edlin', 'fc',
                     'find', 'format', 'htmlhelp', 'label', 'mem', 'mode', 'nansi', 'share', 'sort',
                     'swsubst', 'tree', 'curl', 'gopherus', 'links', 'ping',
-                    'dosmid', 'adplay', 'opencp']
+                    'dosmid', 'adplay', 'opencp', 'dn2', 'terminal' ]
 
 def extract_zipfile_entry(archive, zipinfo, output_filename):
     if Path(output_filename).exists():
