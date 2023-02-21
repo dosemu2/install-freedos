@@ -11,7 +11,7 @@ import zlib
 from pathlib import Path
 
 USERSPACE_TOOLS = [ 'assign', 'attrib', 'choice', 'comp', 'debug', 'devload', 'display', 'edit', 'edlin', 'fc',
-                    'find', 'format', 'htmlhelp', 'label', 'mem', 'mode', 'nansi', 'share', 'sort',
+                    'fdxms', 'find', 'format', 'htmlhelp', 'label', 'mem', 'mode', 'nansi', 'share', 'sort',
                     'swsubst', 'tree', 'curl', 'gopherus', 'links', 'ping',
                     'dosmid', 'adplay', 'opencp', 'dn2', 'terminal' ]
 

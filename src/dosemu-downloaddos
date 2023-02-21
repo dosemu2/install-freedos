@@ -21,10 +21,10 @@ FREEDOS12_URL = FREEDOS_BASE_URL + '/1.2'
 FREEDOS13_URL = FREEDOS_BASE_URL + '/1.3'
 FREEDOS_APPS = [ 'dn2' ]
 FREEDOS_USERSPACE_TOOLS = [ 'assign', 'attrib', 'choice', 'comp', 'debug', 'devload', 'display', 'edit', 'edlin', 'fc',
-                    'find', 'format', 'htmlhelp', 'label', 'mem', 'mode', 'nansi', 'share', 'sort', 'swsubst', 'tree']
+                    'fdxms', 'find', 'format', 'htmlhelp', 'label', 'mem', 'mode', 'nansi', 'share', 'sort', 'swsubst', 'tree']
 FREEDOS_ARCHIVES_KERNEL_COMMAND = [ 'kernel', 'command', 'freecom' ]
 FREEDOS_ARCHIVES_EXTRA = ['defrag', 'deltree', 'diskcomp', 'diskcopy', 'exe2bin', 'more', 'move', 'replace',
-                     'share', 'shsucdx', 'xcopy']
+                    'share', 'shsucdx', 'xcopy']
 FREEDOS_UNIXLIKE_ARCHIVES = ['touch']
 FREEDOS_UTIL_ARCHIVES = ['wcd']
 FREEDOS_NET_ARCHIVES = ['curl', 'gopherus', 'links', 'ping', 'terminal']
