@@ -104,14 +104,6 @@ parser.add_argument("-v", "--variant", type=str, choices=['full', 'userspace'], 
 
 args = parser.parse_args()
 
-# system installation
-try:
-    info = subprocess.run(['dosemu', '-info'], stdout=subprocess.PIPE).stdout.decode(sys.stdout.encoding).splitlines()[0]
-    cmddir = os.path.join(info[info.find(': ') + 2:], 'share', 'dosemu', 'commands', 'c')
-except FileNotFoundError:
-    # running from within source tree
-    cmddir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'c')
-
 if not args.source:
     shortname = 'freedos13'
     source = os.path.join(os.environ['HOME'], '.cache', 'dosemu', shortname)
@@ -134,6 +126,13 @@ else:
 if args.variant == 'full':
     install_freedos_archives(source, destination, args.variant)
     symlink_freecom(destination)
+    # system installation
+    try:
+        info = subprocess.run(['dosemu', '-info'], stdout=subprocess.PIPE).stdout.decode(sys.stdout.encoding).splitlines()[0]
+        cmddir = os.path.join(info[info.find(': ') + 2:], 'share', 'dosemu', 'commands', 'c')
+    except FileNotFoundError:
+        # running from within source tree
+        cmddir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'c')
     shutil.copy(os.path.join(cmddir, 'fdconfig.sys'), destination)
     sys.exit(0)
 
