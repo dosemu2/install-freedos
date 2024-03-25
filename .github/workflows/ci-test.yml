@@ -1,0 +1,25 @@
+name: Test
+
+on:
+  schedule:
+    - cron: '23 23 * * 0' # 23:23 Every Sunday
+  pull_request:
+    types:
+      - opened
+      - reopened
+      - synchronize
+  push:
+
+jobs:
+  Test:
+    name: Test
+
+    if: contains(github.event.head_commit.message, '[skip ci]') == false
+
+    runs-on: ubuntu-22.04
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Test
+      run: ./ci_test.sh
