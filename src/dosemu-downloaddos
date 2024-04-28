@@ -19,10 +19,9 @@ FREEDOS12_URL = FREEDOS_DEFAULT_MIRROR + '/repositories/1.2'
 FREEDOS13_URL = FREEDOS_DEFAULT_MIRROR + '/repositories/1.3'
 
 FREEDOS_USERSPACE_TOOLS = [ 'assign', 'attrib', 'choice', 'comp', 'debug', 'devload', 'display', 'edit', 'edlin', 'fc',
-                    'fdxms', 'find', 'format', 'label', 'mem', 'mode', 'nansi', 'share', 'sort', 'swsubst', 'tree']
+                    'fdxms', 'find', 'format', 'label', 'mem', 'mode', 'nansi', 'share', 'sort', 'swsubst', 'tree', 'xcopy']
 # currently unused
-FREEDOS_ARCHIVES_EXTRA = ['defrag', 'deltree', 'diskcomp', 'diskcopy', 'exe2bin', 'more', 'move', 'replace',
-                    'share', 'shsucdx', 'xcopy']
+FREEDOS_ARCHIVES_EXTRA = ['defrag', 'deltree', 'diskcomp', 'diskcopy', 'exe2bin', 'more', 'move', 'replace', 'shsucdx']
 
 FREEDOS11_APPS = []
 FREEDOS12_APPS = FREEDOS13_APPS = ['dn2']
