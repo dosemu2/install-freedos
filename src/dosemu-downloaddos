@@ -69,7 +69,10 @@ freedos13_userspace += [ FREEDOS13_URL + '/devel/' + x + '.zip' for x in FREEDOS
 freedos13_pkginfo = [ FREEDOS13_URL + '/pkg-info/' + x.split('/')[-1].removesuffix('zip') + 'txt'
         for x in freedos13_boot + freedos13_userspace ]
 
-TMP_DIR = os.path.join('/tmp', os.path.basename(sys.argv[0]) + '-' + os.environ['USER'] + '-' + str(os.getpid()))
+tmp = os.getenv("TMPDIR")
+if tmp is None:
+    tmp = '/tmp'
+TMP_DIR = os.path.join(tmp, os.path.basename(sys.argv[0]) + '-' + str(os.getpid()))
 
 def check_sum_pkg_info(destination_file):
     pkg_info_file = open(destination_file[:-3] + 'txt', 'r')
