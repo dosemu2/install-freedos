@@ -23,29 +23,14 @@ FREEDOS_USERSPACE_TOOLS = [ 'assign', 'attrib', 'choice', 'comp', 'debug', 'devl
 # currently unused
 FREEDOS_ARCHIVES_EXTRA = ['defrag', 'deltree', 'diskcomp', 'diskcopy', 'exe2bin', 'more', 'move', 'replace', 'shsucdx']
 
-FREEDOS11_APPS = []
 FREEDOS12_APPS = FREEDOS13_APPS = ['dn2']
-FREEDOS11_BOOT = ['kernel', 'command']
 FREEDOS12_BOOT = FREEDOS13_BOOT = ['kernel', 'freecom']
-FREEDOS11_HELP = ['help']
 FREEDOS12_HELP = FREEDOS13_HELP = ['htmlhelp']
 FREEDOS_UNIXLIKE_ARCHIVES = ['touch']
-FREEDOS11_UTIL = ['touch']
 FREEDOS12_UTIL = FREEDOS13_UTIL = ['wcd']
-FREEDOS11_NET = ['curl', 'gopherus', 'ping']
 FREEDOS12_NET = FREEDOS13_NET = ['curl', 'gopherus', 'links', 'ping', 'terminal']
 FREEDOS_SOUND_ARCHIVES = ['dosmid', 'adplay', 'opencp']
 FREEDOS_DEVEL_ARCHIVES = ['bwbasic']
-
-freedos11_boot = [ FREEDOS11_URL + '/base/' + x + '.zip' for x in FREEDOS11_BOOT ]
-freedos11_userspace = [ FREEDOS11_URL + '/apps/' + x + '.zip' for x in FREEDOS11_APPS ]
-freedos11_userspace += [ FREEDOS11_URL + '/base/' + x + '.zip' for x in FREEDOS_USERSPACE_TOOLS + FREEDOS11_HELP ]
-freedos11_userspace += [ FREEDOS11_URL + '/util/' + x + '.zip' for x in FREEDOS11_UTIL ]
-freedos11_userspace += [ FREEDOS11_URL + '/net/' + x + '.zip' for x in FREEDOS11_NET ]
-freedos11_userspace += [ FREEDOS11_URL + '/sound/' + x + '.zip' for x in FREEDOS_SOUND_ARCHIVES ]
-freedos11_userspace += [ FREEDOS11_URL + '/devel/' + x + '.zip' for x in FREEDOS_DEVEL_ARCHIVES ]
-freedos11_pkginfo = [ FREEDOS11_URL + '/pkg-info/' + x.split('/')[-1].removesuffix('zip') + 'txt'
-        for x in freedos11_boot + freedos11_userspace ]
 
 freedos12_boot = [ FREEDOS12_URL + '/base/' + x + '.zip' for x in FREEDOS12_BOOT + FREEDOS12_HELP ]
 freedos12_userspace = [ FREEDOS12_URL + '/apps/' + x + '.zip' for x in FREEDOS12_APPS ]
@@ -168,8 +153,6 @@ def download_dos(dos_flavour, destination):
         info = freedos13_pkginfo
     elif dos_flavour.startswith("freedos12"):
         info = freedos12_pkginfo
-    elif dos_flavour.startswith("freedos11"):
-        info = freedos11_pkginfo
     for pkg in info:
         try:
             download_file(pkg, destination)
@@ -186,10 +169,6 @@ def download_dos(dos_flavour, destination):
         pkgs += freedos12_userspace
     if dos_flavour in ['freedos12']:
         pkgs += freedos12_boot
-    if dos_flavour in ['freedos11userspace', 'freedos11']:
-        pkgs += freedos11_userspace
-    if dos_flavour in ['freedos11']:
-        pkgs += freedos11_boot
     for pkg in pkgs:
         try:
             download_file(pkg, destination)
@@ -239,12 +218,10 @@ if args.list:
     print('freedos13userspace FreeDOS 1.3 userspace (2022)')
     print('freedos12 FreeDOS 1.2 (2016)')
     print('freedos12userspace FreeDOS 1.2 userspace (2016)')
-    print('freedos11 FreeDOS 1.1 (2011)')
-    print('freedos11userspace FreeDOS 1.1 userspace (2011)')
     sys.exit(0)
 
 if args.test:
-    urls = (freedos11_boot + freedos11_userspace +
+    urls = (
             freedos12_boot + freedos12_userspace +
             freedos13_boot + freedos13_userspace)
     if not urls_ok(urls, True):
