@@ -161,14 +161,16 @@ def download_dos(dos_flavour, destination):
 
     print('Downloading FreeDOS...')
     pkgs = []
-    if dos_flavour in ['freedos13userspace', 'freedos13']:
+    if dos_flavour in ['freedos13userspace']:
         pkgs += freedos13_userspace
     if dos_flavour in ['freedos13']:
         pkgs += freedos13_boot
-    if dos_flavour in ['freedos12userspace', 'freedos12']:
+        pkgs += freedos13_userspace
+    if dos_flavour in ['freedos12userspace']:
         pkgs += freedos12_userspace
     if dos_flavour in ['freedos12']:
         pkgs += freedos12_boot
+        pkgs += freedos12_userspace
     for pkg in pkgs:
         try:
             download_file(pkg, destination)
