@@ -17,42 +17,54 @@ FREEDOS_DEFAULT_MIRROR = 'https://www.ibiblio.org/pub/micro/pc-stuff/freedos/fil
 FREEDOS11_URL = FREEDOS_DEFAULT_MIRROR + '/repositories/1.1'
 FREEDOS12_URL = FREEDOS_DEFAULT_MIRROR + '/repositories/1.2'
 FREEDOS13_URL = FREEDOS_DEFAULT_MIRROR + '/repositories/1.3'
+FREEDOS14_URL = FREEDOS_DEFAULT_MIRROR + '/repositories/1.4'
 
 FREEDOS_USERSPACE_TOOLS = [ 'assign', 'attrib', 'choice', 'comp', 'debug', 'devload', 'display', 'edit', 'edlin', 'fc',
                     'fdxms', 'find', 'format', 'label', 'mem', 'mode', 'nansi', 'share', 'sort', 'swsubst', 'tree', 'xcopy']
 # currently unused
 FREEDOS_ARCHIVES_EXTRA = ['defrag', 'deltree', 'diskcomp', 'diskcopy', 'exe2bin', 'more', 'move', 'replace', 'shsucdx']
 
-FREEDOS12_APPS = FREEDOS13_APPS = ['dn2']
-FREEDOS12_BOOT = FREEDOS13_BOOT = ['kernel', 'freecom']
-FREEDOS12_HELP = FREEDOS13_HELP = ['htmlhelp']
+FREEDOS_APPS = ['dn2']
+FREEDOS_BOOT = ['kernel', 'freecom']
+FREEDOS_HELP = ['htmlhelp']
 FREEDOS_UNIXLIKE_ARCHIVES = ['touch']
-FREEDOS12_UTIL = FREEDOS13_UTIL = ['wcd']
-FREEDOS12_NET = FREEDOS13_NET = ['curl', 'gopherus', 'links', 'ping', 'terminal']
+FREEDOS_UTIL = ['wcd']
+FREEDOS_NET = ['curl', 'gopherus', 'links', 'ping', 'terminal']
 FREEDOS_SOUND_ARCHIVES = ['dosmid', 'adplay', 'opencp']
 FREEDOS_DEVEL_ARCHIVES = ['bwbasic']
 
-freedos12_boot = [ FREEDOS12_URL + '/base/' + x + '.zip' for x in FREEDOS12_BOOT + FREEDOS12_HELP ]
-freedos12_userspace = [ FREEDOS12_URL + '/apps/' + x + '.zip' for x in FREEDOS12_APPS ]
-freedos12_userspace += [ FREEDOS12_URL + '/base/' + x + '.zip' for x in FREEDOS_USERSPACE_TOOLS + FREEDOS12_HELP ]
+freedos12_boot = [ FREEDOS12_URL + '/base/' + x + '.zip' for x in FREEDOS_BOOT + FREEDOS_HELP ]
+freedos12_userspace = [ FREEDOS12_URL + '/apps/' + x + '.zip' for x in FREEDOS_APPS ]
+freedos12_userspace += [ FREEDOS12_URL + '/base/' + x + '.zip' for x in FREEDOS_USERSPACE_TOOLS + FREEDOS_HELP ]
 freedos12_userspace += [ FREEDOS12_URL + '/unix/' + x + '.zip' for x in FREEDOS_UNIXLIKE_ARCHIVES ]
-freedos12_userspace += [ FREEDOS12_URL + '/util/' + x + '.zip' for x in FREEDOS12_UTIL ]
-freedos12_userspace += [ FREEDOS12_URL + '/net/' + x + '.zip' for x in FREEDOS12_NET ]
+freedos12_userspace += [ FREEDOS12_URL + '/util/' + x + '.zip' for x in FREEDOS_UTIL ]
+freedos12_userspace += [ FREEDOS12_URL + '/net/' + x + '.zip' for x in FREEDOS_NET ]
 freedos12_userspace += [ FREEDOS12_URL + '/sound/' + x + '.zip' for x in FREEDOS_SOUND_ARCHIVES ]
 freedos12_userspace += [ FREEDOS12_URL + '/devel/' + x + '.zip' for x in FREEDOS_DEVEL_ARCHIVES ]
 freedos12_pkginfo = [ FREEDOS12_URL + '/pkg-info/' + x.split('/')[-1].removesuffix('zip') + 'txt'
         for x in freedos12_boot + freedos12_userspace ]
 
-freedos13_boot = [ FREEDOS13_URL + '/base/' + x + '.zip' for x in FREEDOS13_BOOT ]
-freedos13_userspace = [ FREEDOS13_URL + '/apps/' + x + '.zip' for x in FREEDOS13_APPS ]
-freedos13_userspace += [ FREEDOS13_URL + '/base/' + x + '.zip' for x in FREEDOS_USERSPACE_TOOLS + FREEDOS13_HELP]
+freedos13_boot = [ FREEDOS13_URL + '/base/' + x + '.zip' for x in FREEDOS_BOOT ]
+freedos13_userspace = [ FREEDOS13_URL + '/apps/' + x + '.zip' for x in FREEDOS_APPS ]
+freedos13_userspace += [ FREEDOS13_URL + '/base/' + x + '.zip' for x in FREEDOS_USERSPACE_TOOLS + FREEDOS_HELP]
 freedos13_userspace += [ FREEDOS13_URL + '/unix/' + x + '.zip' for x in FREEDOS_UNIXLIKE_ARCHIVES ]
-freedos13_userspace += [ FREEDOS13_URL + '/util/' + x + '.zip' for x in FREEDOS13_UTIL ]
-freedos13_userspace += [ FREEDOS13_URL + '/net/' + x + '.zip' for x in FREEDOS13_NET ]
+freedos13_userspace += [ FREEDOS13_URL + '/util/' + x + '.zip' for x in FREEDOS_UTIL ]
+freedos13_userspace += [ FREEDOS13_URL + '/net/' + x + '.zip' for x in FREEDOS_NET ]
 freedos13_userspace += [ FREEDOS13_URL + '/sound/' + x + '.zip' for x in FREEDOS_SOUND_ARCHIVES ]
 freedos13_userspace += [ FREEDOS13_URL + '/devel/' + x + '.zip' for x in FREEDOS_DEVEL_ARCHIVES ]
 freedos13_pkginfo = [ FREEDOS13_URL + '/pkg-info/' + x.split('/')[-1].removesuffix('zip') + 'txt'
         for x in freedos13_boot + freedos13_userspace ]
+
+freedos14_boot = [ FREEDOS14_URL + '/base/' + x + '.zip' for x in FREEDOS_BOOT ]
+freedos14_userspace = [ FREEDOS14_URL + '/apps/' + x + '.zip' for x in FREEDOS_APPS ]
+freedos14_userspace += [ FREEDOS14_URL + '/base/' + x + '.zip' for x in FREEDOS_USERSPACE_TOOLS + FREEDOS_HELP]
+freedos14_userspace += [ FREEDOS14_URL + '/unix/' + x + '.zip' for x in FREEDOS_UNIXLIKE_ARCHIVES ]
+freedos14_userspace += [ FREEDOS14_URL + '/util/' + x + '.zip' for x in FREEDOS_UTIL ]
+freedos14_userspace += [ FREEDOS14_URL + '/net/' + x + '.zip' for x in FREEDOS_NET ]
+freedos14_userspace += [ FREEDOS14_URL + '/sound/' + x + '.zip' for x in FREEDOS_SOUND_ARCHIVES ]
+freedos14_userspace += [ FREEDOS14_URL + '/devel/' + x + '.zip' for x in FREEDOS_DEVEL_ARCHIVES ]
+freedos14_pkginfo = [ FREEDOS14_URL + '/pkg-info/' + x.split('/')[-1].removesuffix('zip') + 'txt'
+        for x in freedos14_boot + freedos14_userspace ]
 
 tmp = os.getenv("TMPDIR")
 if tmp is None:
@@ -149,7 +161,9 @@ def download_dos(dos_flavour, destination):
 
     print('Downloading checksums')
     info = []
-    if dos_flavour.startswith("freedos13"):
+    if dos_flavour.startswith("freedos14"):
+        info = freedos14_pkginfo
+    elif dos_flavour.startswith("freedos13"):
         info = freedos13_pkginfo
     elif dos_flavour.startswith("freedos12"):
         info = freedos12_pkginfo
@@ -161,6 +175,11 @@ def download_dos(dos_flavour, destination):
 
     print('Downloading FreeDOS...')
     pkgs = []
+    if dos_flavour in ['freedos14userspace']:
+        pkgs += freedos14_userspace
+    if dos_flavour in ['freedos14']:
+        pkgs += freedos14_boot
+        pkgs += freedos14_userspace
     if dos_flavour in ['freedos13userspace']:
         pkgs += freedos13_userspace
     if dos_flavour in ['freedos13']:
@@ -216,6 +235,8 @@ parser.add_argument("-s", "--sha256sum", help="Specify one or more sha256sum(s)"
 
 args = parser.parse_args()
 if args.list:
+    print('freedos13 FreeDOS 1.4 (2024)')
+    print('freedos14userspace FreeDOS 1.4 userspace (2024)')
     print('freedos13 FreeDOS 1.3 (2022)')
     print('freedos13userspace FreeDOS 1.3 userspace (2022)')
     print('freedos12 FreeDOS 1.2 (2016)')
@@ -225,7 +246,9 @@ if args.list:
 if args.test:
     urls = (
             freedos12_boot + freedos12_userspace +
-            freedos13_boot + freedos13_userspace)
+            freedos13_boot + freedos13_userspace +
+            freedos14_boot + freedos14_userspace
+           )
     if not urls_ok(urls, True):
         sys.exit(1)
     sys.exit(0)

@@ -6,7 +6,7 @@ import subprocess
 import sys
 
 CACHE_DIR = os.path.join(os.environ['HOME'], '.cache', 'dosemu')
-FREEDOS_VERSION = '13'
+FREEDOS_VERSION = '14'
 
 SCRIPT_ROOT = os.path.dirname(os.path.realpath(__file__))
 

@@ -105,7 +105,7 @@ parser.add_argument("-v", "--variant", type=str, choices=['full', 'userspace'], 
 args = parser.parse_args()
 
 if not args.source:
-    shortname = 'freedos13'
+    shortname = 'freedos14'
     source = os.path.join(os.environ['HOME'], '.cache', 'dosemu', shortname)
 else:
     if os.sep in args.source:
