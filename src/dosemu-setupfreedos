@@ -29,7 +29,7 @@ def extract_zipfile_entry(archive, zipinfo, output_filename):
         else:
             print('Existing file with different content found ' + output_filename + """
                   Likely another DOS version is installed already. Remove the
-                  existing file and rerun this script to proceed.""")
+                  existing installation with rmfdusr and rerun this script to proceed.""")
             sys.exit(1)
     with open(output_filename, 'wb') as output_file:
         output_file.write(archive.read(zipinfo.filename))
