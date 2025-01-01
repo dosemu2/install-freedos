@@ -14,7 +14,8 @@ USERSPACE_TOOLS = [ 'assign', 'attrib', 'choice', 'comp', 'debug', 'devload', 'd
                     'fdxms', 'find', 'format', 'htmlhelp', 'label', 'mem', 'mode', 'nansi', 'share', 'sort',
                     'swsubst', 'tree', 'curl', 'gopherus', 'links', 'ping',
                     'dosmid', 'adplay', 'opencp', 'dn2', 'terminal', 'dos32a',
-                    'touch', 'gnused', 'grep', 'head', 'less', 'tee', 'which'
+                    'touch', 'gnused', 'grep', 'head', 'less', 'tee', 'which',
+                    'sbpmixer', 'playcd', 'sjgplay'
                   ]
 
 def extract_zipfile_entry(archive, zipinfo, output_filename):

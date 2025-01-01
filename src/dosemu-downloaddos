@@ -31,6 +31,7 @@ FREEDOS_UNIXLIKE_ARCHIVES = ['touch', 'gnused', 'grep', 'head', 'less', 'tee', '
 FREEDOS_UTIL = ['wcd', 'dos32a']
 FREEDOS_NET = ['curl', 'gopherus', 'links', 'ping', 'terminal']
 FREEDOS_SOUND_ARCHIVES = ['dosmid', 'adplay', 'opencp']
+FREEDOS14_SOUND_ARCHIVES = ['sbpmixer', 'playcd', 'sjgplay']
 FREEDOS_DEVEL_ARCHIVES = ['bwbasic']
 
 freedos12_boot = [ FREEDOS12_URL + '/base/' + x + '.zip' for x in FREEDOS_BOOT + FREEDOS_HELP ]
@@ -61,7 +62,7 @@ freedos14_userspace += [ FREEDOS14_URL + '/base/' + x + '.zip' for x in FREEDOS_
 freedos14_userspace += [ FREEDOS14_URL + '/unix/' + x + '.zip' for x in FREEDOS_UNIXLIKE_ARCHIVES ]
 freedos14_userspace += [ FREEDOS14_URL + '/util/' + x + '.zip' for x in FREEDOS_UTIL ]
 freedos14_userspace += [ FREEDOS14_URL + '/net/' + x + '.zip' for x in FREEDOS_NET ]
-freedos14_userspace += [ FREEDOS14_URL + '/sound/' + x + '.zip' for x in FREEDOS_SOUND_ARCHIVES ]
+freedos14_userspace += [ FREEDOS14_URL + '/sound/' + x + '.zip' for x in FREEDOS_SOUND_ARCHIVES + FREEDOS14_SOUND_ARCHIVES]
 freedos14_userspace += [ FREEDOS14_URL + '/devel/' + x + '.zip' for x in FREEDOS_DEVEL_ARCHIVES ]
 freedos14_pkginfo = [ FREEDOS14_URL + '/pkg-info/' + x.split('/')[-1].removesuffix('zip') + 'txt'
         for x in freedos14_boot + freedos14_userspace ]
