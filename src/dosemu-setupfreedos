@@ -27,9 +27,9 @@ def extract_zipfile_entry(archive, zipinfo, output_filename):
             print('File with equal content ' + output_filename + ' already exists, skipping...')
             return
         else:
-            print('Existing file with different content found ' + output_filename + """
-                  Likely another DOS version is installed already. Remove the
-                  existing installation with rmfdusr and rerun this script to proceed.""")
+            print('\nExisting file with different content found:\n\t' + output_filename + """
+Likely another DOS version is installed already. Remove the
+existing installation with rmfdusr and rerun this script to proceed.""")
             sys.exit(1)
     with open(output_filename, 'wb') as output_file:
         output_file.write(archive.read(zipinfo.filename))
@@ -92,9 +92,12 @@ def symlink_freecom(drive_root):
         if os.path.islink(command_destination) and os.readlink(command_destination) == command_source:
             print('Symlink command.com -> bin/command.com already exists.')
         else:
-            print("""Existing command.com with different content found.
-                  Likely another DOS version is installed already. Remove the
-                  existing file and rerun this script to proceed.""")
+            print("""
+
+Existing command.com with different content found.
+Likely another DOS version is installed already. Remove the
+existing file and rerun this script to proceed.
+""")
     else:
         os.symlink(command_source, command_destination)
     print('Installation complete')
