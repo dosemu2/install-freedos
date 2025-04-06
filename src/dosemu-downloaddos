@@ -236,8 +236,8 @@ parser.add_argument("-s", "--sha256sum", help="Specify one or more sha256sum(s)"
 
 args = parser.parse_args()
 if args.list:
-    print('freedos13 FreeDOS 1.4 (2024)')
-    print('freedos14userspace FreeDOS 1.4 userspace (2024)')
+    print('freedos14 FreeDOS 1.4 (2025)')
+    print('freedos14userspace FreeDOS 1.4 userspace (2025)')
     print('freedos13 FreeDOS 1.3 (2022)')
     print('freedos13userspace FreeDOS 1.3 userspace (2022)')
     print('freedos12 FreeDOS 1.2 (2016)')
