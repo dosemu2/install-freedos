@@ -63,12 +63,13 @@ def extract_freedos_archives(source, drive_root, variant):
                 filename = entry.filename.lower()
                 if filename.startswith('packages/') or filename.startswith('source/') or filename == 'bin/kernl86.sys' or filename == 'bin/kernl386.sys':
                     continue
-                elif entry.is_dir():
-                    output_filename = os.path.join(drive_root, filename)
-                    os.makedirs(output_filename, exist_ok=True)
+
+                path = Path(drive_root) / filename
+                if entry.is_dir():
+                    path.mkdir(parents=True, exist_ok=True)
                 else:
-                    output_filename = os.path.join(drive_root, filename)
-                    extract_zipfile_entry(archive, entry, output_filename)
+                    path.parent.mkdir(parents=True, exist_ok=True)
+                    extract_zipfile_entry(archive, entry, path)
 
 def create_symlink(source, destination):
     if Path(destination).is_file():
