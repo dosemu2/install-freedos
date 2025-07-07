@@ -4,12 +4,10 @@ import argparse
 import hashlib
 import os
 import re
-import shutil
-import subprocess
 import sys
+import time
 import urllib.parse
 import urllib.request
-import zipfile
 from pathlib import Path
 from tqdm import tqdm
 
@@ -199,22 +197,28 @@ def download_dos(dos_flavour, destination):
 
     print('Downloading done')
 
-def urls_ok(urls, verbose=False):
+def urls_ok(urls, verbose=False, timeout=10, retries=3, retry_delay=1):
     failures = 0
 
     def test_url(url):
-        try:
-            req = urllib.request.Request(url, method="HEAD")
-            resp = urllib.request.urlopen(req)
-            a = resp.read()
-            if (verbose):
-                print("INFO: Checked (%s)" % url)
-
-        except urllib.error.HTTPError:
-            print("FAIL: Does not exist (%s)" % url)
-            return False
-
-        return True
+        for attempt in range(1, retries + 1):
+            try:
+                req = urllib.request.Request(url, method="HEAD")
+                resp = urllib.request.urlopen(req, timeout=timeout)
+                resp.read()
+                if verbose:
+                    print("INFO: Checked (%s)" % url)
+                return True
+            except urllib.error.HTTPError:
+                print("FAIL: Does not exist (%s)" % url)
+                return False
+            except Exception as e:
+                if attempt == retries:
+                    print("FAIL: Error on attempt %d: %s (%s)" % (attempt, e, url))
+                    return False
+                if verbose:
+                    print("WARN: Attempt %d failed for %s, retrying..." % (attempt, url))
+                time.sleep(retry_delay)
 
     for url in urls:
         if not test_url(url):
@@ -250,7 +254,7 @@ if args.test:
             freedos13_boot + freedos13_userspace +
             freedos14_boot + freedos14_userspace
            )
-    if not urls_ok(urls, True):
+    if not urls_ok(urls, verbose=True, timeout=20):
         sys.exit(1)
     sys.exit(0)
 
