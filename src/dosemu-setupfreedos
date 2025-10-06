@@ -24,10 +24,10 @@ def extract_zipfile_entry(archive, zipinfo, output_filename):
             existing_file_crc32 = zlib.crc32(existing_file.read())
             existing_file.close()
         if existing_file_crc32 == zipinfo.CRC:
-            print('File with equal content ' + output_filename + ' already exists, skipping...')
+            print('File with equal content ' + output_filename.name + ' already exists, skipping...')
             return
         else:
-            print('\nExisting file with different content found:\n\t' + output_filename + """
+            print('\nExisting file with different content found:\n\t' + output_filename.name + """
 Likely another DOS version is installed already. Remove the
 existing installation with rmfdusr and rerun this script to proceed.""")
             sys.exit(1)
