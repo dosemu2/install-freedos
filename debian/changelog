@@ -1,3 +1,9 @@
+install-freedos (0.4-1) noble; urgency=low
+
+  * 0.4
+
+ -- Stas Sergeev <stsp@users.sourceforge.net>  Tue, 7 Oct 2025 10:30:00 +0300
+
 install-freedos (0.3-1) noble; urgency=low
 
   * 0.3
