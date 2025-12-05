@@ -40,7 +40,7 @@ freedos12_userspace += [ FREEDOS12_URL + '/util/' + x + '.zip' for x in FREEDOS_
 freedos12_userspace += [ FREEDOS12_URL + '/net/' + x + '.zip' for x in FREEDOS_NET ]
 freedos12_userspace += [ FREEDOS12_URL + '/sound/' + x + '.zip' for x in FREEDOS_SOUND_ARCHIVES ]
 freedos12_userspace += [ FREEDOS12_URL + '/devel/' + x + '.zip' for x in FREEDOS_DEVEL_ARCHIVES ]
-freedos12_pkginfo = [ FREEDOS12_URL + '/pkg-info/' + x.split('/')[-1].removesuffix('zip') + 'txt'
+freedos12_pkginfo = [ FREEDOS12_URL + '/pkg-info/' + x.split('/')[-1].replace('.zip', '.txt')
         for x in freedos12_boot + freedos12_userspace ]
 
 freedos13_boot = [ FREEDOS13_URL + '/base/' + x + '.zip' for x in FREEDOS_BOOT ]
@@ -51,7 +51,7 @@ freedos13_userspace += [ FREEDOS13_URL + '/util/' + x + '.zip' for x in FREEDOS_
 freedos13_userspace += [ FREEDOS13_URL + '/net/' + x + '.zip' for x in FREEDOS_NET ]
 freedos13_userspace += [ FREEDOS13_URL + '/sound/' + x + '.zip' for x in FREEDOS_SOUND_ARCHIVES ]
 freedos13_userspace += [ FREEDOS13_URL + '/devel/' + x + '.zip' for x in FREEDOS_DEVEL_ARCHIVES ]
-freedos13_pkginfo = [ FREEDOS13_URL + '/pkg-info/' + x.split('/')[-1].removesuffix('zip') + 'txt'
+freedos13_pkginfo = [ FREEDOS13_URL + '/pkg-info/' + x.split('/')[-1].replace('.zip', '.txt')
         for x in freedos13_boot + freedos13_userspace ]
 
 freedos14_boot = [ FREEDOS14_URL + '/base/' + x + '.zip' for x in FREEDOS_BOOT ]
@@ -62,7 +62,7 @@ freedos14_userspace += [ FREEDOS14_URL + '/util/' + x + '.zip' for x in FREEDOS_
 freedos14_userspace += [ FREEDOS14_URL + '/net/' + x + '.zip' for x in FREEDOS_NET ]
 freedos14_userspace += [ FREEDOS14_URL + '/sound/' + x + '.zip' for x in FREEDOS_SOUND_ARCHIVES + FREEDOS14_SOUND_ARCHIVES]
 freedos14_userspace += [ FREEDOS14_URL + '/devel/' + x + '.zip' for x in FREEDOS_DEVEL_ARCHIVES ]
-freedos14_pkginfo = [ FREEDOS14_URL + '/pkg-info/' + x.split('/')[-1].removesuffix('zip') + 'txt'
+freedos14_pkginfo = [ FREEDOS14_URL + '/pkg-info/' + x.split('/')[-1].replace('.zip', '.txt')
         for x in freedos14_boot + freedos14_userspace ]
 
 tmp = os.getenv("TMPDIR")
